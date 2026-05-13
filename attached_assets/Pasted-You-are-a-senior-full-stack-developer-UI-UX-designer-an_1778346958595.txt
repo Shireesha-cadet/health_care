@@ -1,0 +1,476 @@
+You are a senior full-stack developer, UI/UX designer, and AI integration expert.
+
+Build a COMPLETE AI-powered Healthcare Monitoring Web Application from scratch using a PREMIUM modern SaaS-style UI.
+
+IMPORTANT:
+
+* Focus ONLY on the features mentioned in this prompt.
+* Build production-ready clean architecture.
+* Keep code modular and scalable for future additions.
+* Use modern folder structure.
+* Ensure the project runs end-to-end without errors.
+
+---
+
+# 🛠️ TECH STACK
+
+## Frontend
+
+Use:
+
+* React.js
+* Tailwind CSS
+* React Router
+* Axios
+* Framer Motion
+* Lucide React Icons
+* Recharts
+
+## Backend
+
+Use:
+
+* Flask
+* Flask REST API
+* SQLAlchemy
+* SQLite
+
+## Authentication
+
+Implement:
+
+* JWT Authentication
+* Protected Routes
+* Password Hashing
+* Role-based Access
+
+---
+
+# 🎨 PREMIUM UI/UX REQUIREMENTS (VERY IMPORTANT)
+
+The UI quality is EXTREMELY IMPORTANT.
+
+The application must look like:
+
+* Premium SaaS healthcare platform
+* Modern startup dashboard
+* Dribbble-quality UI
+* Professional admin analytics panel
+
+Use the provided reference dashboard designs as inspiration.
+
+The interface should feel:
+
+* Premium
+* Elegant
+* Smooth
+* Minimal
+* Modern
+* Portfolio-worthy
+
+---
+
+# 🌈 COLOR SYSTEM
+
+Use a PREMIUM BLUE healthcare theme.
+
+## Primary Colors
+
+* Royal Blue
+* Sky Blue
+* Cyan
+
+## Secondary Colors
+
+* White
+* Soft Gray
+* Light Blue
+
+## Status Colors
+
+* Success → Emerald
+* Warning → Orange
+* Danger → Red
+
+Use gradients:
+
+* blue → cyan
+* royal blue → sky blue
+
+Avoid:
+
+* Bootstrap-like UI
+* Sharp corners
+* Cluttered layouts
+* Heavy borders
+
+---
+
+# ✨ ANIMATIONS
+
+Use:
+
+* Fade-in animations
+* Hover scaling
+* Smooth transitions
+* Animated counters
+* Loading skeletons
+
+Use Framer Motion where needed.
+
+---
+
+# 🧭 SIDEBAR DESIGN
+
+Create a premium sidebar:
+
+* Dark blue gradient background
+* Glow effect on active items
+* Lucide icons
+* Rounded active states
+* Smooth hover animations
+
+Sidebar should collapse on mobile.
+
+---
+
+# 🏠 LANDING PAGE
+
+Create a beautiful landing page with:
+
+* Hero section
+* CTA buttons
+* Floating stat cards
+* Healthcare illustrations
+* Features section
+* Testimonials
+* Footer
+
+---
+
+# 🔐 AUTHENTICATION SYSTEM
+
+Build:
+
+* Login page
+* Register page
+* Logout functionality
+
+Roles:
+
+* Patient
+* Doctor
+* Caretaker
+* Hospital Admin
+
+Features:
+
+* JWT Authentication
+* Secure password hashing
+* Role-based dashboards
+* Protected routes
+
+---
+
+# 👤 ROLE-BASED DASHBOARDS
+
+Implement separate dashboards for:
+
+* Patient
+* Doctor
+* Caretaker
+* Hospital Admin
+
+Each role should only access permitted modules.
+
+---
+
+# 👤 PATIENT DASHBOARD
+
+Visible Modules:
+
+* Dashboard
+* Record Vitals
+* AI Assistant
+* Health Analytics
+* Health History
+* Reports
+* Appointments
+* Hospitals
+* Govt Schemes
+* Blood Donation
+* Settings
+
+Patient features:
+
+* Enter vitals
+* View charts
+* Download reports
+* Chat with AI assistant
+* Book appointments
+* View AI insights
+
+---
+
+# 👨‍⚕️ DOCTOR DASHBOARD
+
+Visible Modules:
+
+* Dashboard
+* Patients List
+* Patient Records
+* Appointments
+* Reports
+* AI Insights
+* Emergency Alerts
+* Hospitals
+* Settings
+
+Doctor features:
+
+* View patient vitals
+* Monitor critical patients
+* Generate reports
+* Add prescriptions
+* Manage appointments
+
+---
+
+# 👨‍👩‍👧 CARETAKER DASHBOARD
+
+Visible Modules:
+
+* Dashboard
+* Emergency Alerts
+* SMS Alert History
+* Patient Monitoring
+* Ambulance Tracking
+* Reports
+* Hospitals
+* Doctor Contacts
+* Settings
+
+Caretaker features:
+
+* Monitor patient vitals
+* Receive emergency alerts
+* Track ambulance
+* View reports
+
+---
+
+# 🏥 HOSPITAL ADMIN DASHBOARD
+
+Visible Modules:
+
+* Dashboard
+* Doctor Management
+* Bed & ICU Management
+* Ambulance Management
+* Appointment Management
+* Patient Management
+* Analytics
+* Emergency Control Center
+* Govt Schemes
+* Settings
+
+Hospital Admin features:
+
+* Manage doctors
+* Manage beds
+* View analytics
+* Emergency monitoring
+* ICU management
+
+---
+
+# ❤️ HEALTH MONITORING SYSTEM
+
+Create forms for:
+
+* Heart Rate
+* Blood Pressure
+* SpO2
+* Glucose
+* Temperature
+
+Store:
+
+* Timestamp
+* User ID
+* Health status
+
+Use SQLite database.
+
+---
+
+# 🚨 ANOMALY DETECTION
+
+Create reusable utility functions.
+
+Health states:
+
+* Normal
+* Risk
+* Critical
+
+Examples:
+
+* High BP → Critical
+* Low SpO2 → Critical
+* Slight glucose increase → Risk
+
+Integrate with:
+
+* Dashboard
+* Alerts
+* APIs
+
+---
+
+# 🚨 ALERT SYSTEM WITH SMS NOTIFICATIONS
+
+Generate alerts for:
+
+* High BP
+* High glucose
+* Low oxygen
+* High fever
+* Critical anomalies
+
+Display:
+
+* Alert cards
+* Warning badges
+* Alert history
+* Toast notifications
+* Emergency popups
+
+---
+
+# 📲 CARETAKER SMS ALERT SYSTEM
+
+Automatically send emergency SMS notifications to the registered caretaker whenever critical health conditions are detected.
+
+Each patient must have:
+
+* Assigned caretaker
+* Caretaker phone number
+* Emergency contact info
+
+SMS should contain:
+
+* Patient name
+* Health issue
+* Current vitals
+* Timestamp
+* Emergency recommendation
+
+Use:
+
+* Twilio API OR Fast2SMS API
+
+Create reusable backend service:
+
+* send_sms_alert()
+
+---
+
+# 📊 DASHBOARD ANALYTICS
+
+Create charts using Recharts for:
+
+* Heart Rate
+* BP
+* SpO2
+* Glucose
+* Temperature
+
+Filters:
+
+* Daily
+* Weekly
+* Monthly
+
+---
+
+# 📜 HEALTH HISTORY PAGE
+
+Display:
+
+* Previous records
+* Alerts history
+* Abnormal readings
+* Timeline layout
+
+API:
+GET /history
+
+---
+
+# 🌍 MULTI-LANGUAGE SUPPORT
+
+Add language selector.
+
+Languages:
+
+* English
+* Hindi
+* Telugu
+
+Translate:
+
+* Sidebar
+* Forms
+* Dashboard
+* Alerts
+
+Use JSON i18n files.
+
+---
+
+# 📡 APIs REQUIRED
+
+Implement:
+
+* GET /history
+* POST /health-data
+* GET /dashboard-data
+* POST /send-alert
+* GET /alerts
+
+---
+
+# 📂 PROJECT STRUCTURE
+
+Provide:
+
+* Complete frontend folder structure
+* Backend folder structure
+* Database models
+* API services
+* Utility functions
+* Reusable components
+
+---
+
+# 🎯 FINAL EXPECTATION
+
+The final application should:
+
+* Look like a funded startup product
+* Be hackathon-quality
+* Be portfolio-worthy
+* Have modern clean UI
+* Be responsive
+* Run end-to-end without errors
+
+Provide:
+
+1. Full frontend code
+2. Full backend code
+3. Database models
+4. Setup instructions
+5. requirements.txt
+6. package.json
+7. Environment setu

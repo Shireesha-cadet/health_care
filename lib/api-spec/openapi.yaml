@@ -1,0 +1,807 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Healthcare Monitoring Platform API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Authentication
+  - name: users
+    description: User management
+  - name: vitals
+    description: Health vitals
+  - name: alerts
+    description: Health alerts
+  - name: appointments
+    description: Appointments
+  - name: analytics
+    description: Analytics and dashboard data
+  - name: hospitals
+    description: Hospitals
+  - name: ai
+    description: AI assistant
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /auth/register:
+    post:
+      operationId: registerUser
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: User registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: loginUser
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /vitals:
+    get:
+      operationId: getVitals
+      tags: [vitals]
+      summary: Get vitals for current user
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: period
+          in: query
+          schema:
+            type: ["string", "null"]
+            enum: [daily, weekly, monthly, null]
+        - name: limit
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: List of vitals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VitalRecord"
+    post:
+      operationId: createVital
+      tags: [vitals]
+      summary: Record new vitals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VitalInput"
+      responses:
+        "201":
+          description: Vitals recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VitalRecord"
+
+  /vitals/latest:
+    get:
+      operationId: getLatestVitals
+      tags: [vitals]
+      summary: Get latest vitals snapshot
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: Latest vitals
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LatestVitals"
+
+  /vitals/history:
+    get:
+      operationId: getVitalHistory
+      tags: [vitals]
+      summary: Get vitals history with alerts
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: Vitals history
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VitalsHistory"
+
+  /alerts:
+    get:
+      operationId: getAlerts
+      tags: [alerts]
+      summary: Get health alerts
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: status
+          in: query
+          schema:
+            type: ["string", "null"]
+            enum: [unread, read, all, null]
+      responses:
+        "200":
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Alert"
+    post:
+      operationId: sendAlert
+      tags: [alerts]
+      summary: Create and send alert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlertInput"
+      responses:
+        "201":
+          description: Alert created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Alert"
+
+  /alerts/{alertId}/read:
+    patch:
+      operationId: markAlertRead
+      tags: [alerts]
+      summary: Mark alert as read
+      parameters:
+        - name: alertId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Alert marked read
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Alert"
+
+  /appointments:
+    get:
+      operationId: getAppointments
+      tags: [appointments]
+      summary: Get appointments
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: role
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+    post:
+      operationId: createAppointment
+      tags: [appointments]
+      summary: Book appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentInput"
+      responses:
+        "201":
+          description: Appointment booked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+
+  /appointments/{appointmentId}:
+    patch:
+      operationId: updateAppointment
+      tags: [appointments]
+      summary: Update appointment status
+      parameters:
+        - name: appointmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentUpdate"
+      responses:
+        "200":
+          description: Appointment updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+
+  /analytics/dashboard:
+    get:
+      operationId: getDashboardData
+      tags: [analytics]
+      summary: Get dashboard analytics data
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: role
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardData"
+
+  /analytics/trends:
+    get:
+      operationId: getVitalTrends
+      tags: [analytics]
+      summary: Get vital trends over time
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: period
+          in: query
+          schema:
+            type: string
+            enum: [daily, weekly, monthly]
+            default: weekly
+      responses:
+        "200":
+          description: Trend data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrendData"
+
+  /patients:
+    get:
+      operationId: getPatients
+      tags: [users]
+      summary: Get patients list (doctor/admin view)
+      responses:
+        "200":
+          description: List of patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientSummary"
+
+  /hospitals:
+    get:
+      operationId: getHospitals
+      tags: [hospitals]
+      summary: Get hospitals list
+      responses:
+        "200":
+          description: List of hospitals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Hospital"
+
+  /ai/chat:
+    post:
+      operationId: aiChat
+      tags: [ai]
+      summary: Chat with AI health assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiChatInput"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiReply"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    RegisterInput:
+      type: object
+      required: [name, email, password, role]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 6
+        role:
+          type: string
+          enum: [patient, doctor, caretaker, hospital_admin]
+        phone:
+          type: ["string", "null"]
+        caretakerPhone:
+          type: ["string", "null"]
+
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      required: [token, user]
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+
+    User:
+      type: object
+      required: [id, name, email, role]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [patient, doctor, caretaker, hospital_admin]
+        phone:
+          type: ["string", "null"]
+        caretakerPhone:
+          type: ["string", "null"]
+        avatarUrl:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    VitalInput:
+      type: object
+      required: [heartRate, systolicBp, diastolicBp, spo2, glucose, temperature]
+      properties:
+        heartRate:
+          type: number
+          description: Heart rate in bpm
+        systolicBp:
+          type: number
+          description: Systolic blood pressure mmHg
+        diastolicBp:
+          type: number
+          description: Diastolic blood pressure mmHg
+        spo2:
+          type: number
+          description: Blood oxygen saturation %
+        glucose:
+          type: number
+          description: Blood glucose mg/dL
+        temperature:
+          type: number
+          description: Body temperature Celsius
+        notes:
+          type: ["string", "null"]
+
+    VitalRecord:
+      type: object
+      required: [id, userId, heartRate, systolicBp, diastolicBp, spo2, glucose, temperature, status, createdAt]
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        heartRate:
+          type: number
+        systolicBp:
+          type: number
+        diastolicBp:
+          type: number
+        spo2:
+          type: number
+        glucose:
+          type: number
+        temperature:
+          type: number
+        status:
+          type: string
+          enum: [normal, risk, critical]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    LatestVitals:
+      type: object
+      required: [heartRate, systolicBp, diastolicBp, spo2, glucose, temperature, overallStatus]
+      properties:
+        heartRate:
+          type: ["number", "null"]
+        systolicBp:
+          type: ["number", "null"]
+        diastolicBp:
+          type: ["number", "null"]
+        spo2:
+          type: ["number", "null"]
+        glucose:
+          type: ["number", "null"]
+        temperature:
+          type: ["number", "null"]
+        overallStatus:
+          type: string
+          enum: [normal, risk, critical, unknown]
+        lastUpdated:
+          type: ["string", "null"]
+          format: date-time
+
+    VitalsHistory:
+      type: object
+      required: [records, alertCount, criticalCount]
+      properties:
+        records:
+          type: array
+          items:
+            $ref: "#/components/schemas/VitalRecord"
+        alertCount:
+          type: integer
+        criticalCount:
+          type: integer
+
+    Alert:
+      type: object
+      required: [id, userId, type, severity, message, isRead, createdAt]
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        type:
+          type: string
+          enum: [high_bp, low_bp, high_glucose, low_spo2, high_temperature, high_heart_rate, low_heart_rate, critical]
+        severity:
+          type: string
+          enum: [warning, critical]
+        message:
+          type: string
+        vitals:
+          type: ["string", "null"]
+        isRead:
+          type: boolean
+        smsSent:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    AlertInput:
+      type: object
+      required: [userId, type, severity, message]
+      properties:
+        userId:
+          type: integer
+        type:
+          type: string
+        severity:
+          type: string
+        message:
+          type: string
+        vitals:
+          type: ["string", "null"]
+
+    Appointment:
+      type: object
+      required: [id, patientId, doctorId, scheduledAt, status, reason]
+      properties:
+        id:
+          type: integer
+        patientId:
+          type: integer
+        patientName:
+          type: ["string", "null"]
+        doctorId:
+          type: integer
+        doctorName:
+          type: ["string", "null"]
+        scheduledAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [pending, confirmed, completed, cancelled]
+        reason:
+          type: string
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    AppointmentInput:
+      type: object
+      required: [doctorId, scheduledAt, reason]
+      properties:
+        doctorId:
+          type: integer
+        scheduledAt:
+          type: string
+          format: date-time
+        reason:
+          type: string
+        notes:
+          type: ["string", "null"]
+
+    AppointmentUpdate:
+      type: object
+      properties:
+        status:
+          type: ["string", "null"]
+          enum: [pending, confirmed, completed, cancelled, null]
+        notes:
+          type: ["string", "null"]
+
+    DashboardData:
+      type: object
+      required: [totalPatients, criticalAlerts, todayAppointments, activeAlerts, recentAlerts, recentVitals]
+      properties:
+        totalPatients:
+          type: integer
+        criticalAlerts:
+          type: integer
+        todayAppointments:
+          type: integer
+        activeAlerts:
+          type: integer
+        recentAlerts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Alert"
+        recentVitals:
+          type: array
+          items:
+            $ref: "#/components/schemas/VitalRecord"
+        statusBreakdown:
+          $ref: "#/components/schemas/StatusBreakdown"
+
+    StatusBreakdown:
+      type: object
+      required: [normal, risk, critical]
+      properties:
+        normal:
+          type: integer
+        risk:
+          type: integer
+        critical:
+          type: integer
+
+    TrendData:
+      type: object
+      required: [labels, heartRate, systolicBp, diastolicBp, spo2, glucose, temperature]
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+        heartRate:
+          type: array
+          items:
+            type: ["number", "null"]
+        systolicBp:
+          type: array
+          items:
+            type: ["number", "null"]
+        diastolicBp:
+          type: array
+          items:
+            type: ["number", "null"]
+        spo2:
+          type: array
+          items:
+            type: ["number", "null"]
+        glucose:
+          type: array
+          items:
+            type: ["number", "null"]
+        temperature:
+          type: array
+          items:
+            type: ["number", "null"]
+
+    PatientSummary:
+      type: object
+      required: [id, name, email, phone, overallStatus, lastVitalAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        overallStatus:
+          type: string
+          enum: [normal, risk, critical, unknown]
+        lastVitalAt:
+          type: ["string", "null"]
+          format: date-time
+        latestHeartRate:
+          type: ["number", "null"]
+        latestSpo2:
+          type: ["number", "null"]
+        latestBp:
+          type: ["string", "null"]
+
+    Hospital:
+      type: object
+      required: [id, name, address, phone, specialties, bedsAvailable, icuAvailable]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+        specialties:
+          type: array
+          items:
+            type: string
+        bedsAvailable:
+          type: integer
+        icuAvailable:
+          type: integer
+        rating:
+          type: ["number", "null"]
+        distance:
+          type: ["string", "null"]
+
+    AiChatInput:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+        context:
+          type: ["string", "null"]
+          description: Optional vitals context
+
+    AiReply:
+      type: object
+      required: [reply, suggestions]
+      properties:
+        reply:
+          type: string
+        suggestions:
+          type: array
+          items:
+            type: string

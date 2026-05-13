@@ -1,0 +1,72 @@
+Enhance the existing Health Monitoring System project with the following advanced features, bug fixes, and UI improvements while maintaining a modern, responsive, and user-friendly healthcare-themed design throughout the application.
+
+1. Multilingual Support
+Add multilingual/language translation support across the application.
+Include:
+English
+Telugu
+Hindi
+Add a language selector in the navbar/header.
+Ensure all major UI components, forms, buttons, alerts, and dashboard content dynamically change based on the selected language.
+2. Hospital Section Enhancement
+Create a dedicated “Hospitals” section similar in design and styling to the existing Government Schemes section.
+Display hospital cards with:
+Hospital image
+Hospital name
+Location
+Specialization
+Emergency availability
+Contact details
+Add attractive hover effects, animations, and responsive layouts.
+Include at least 5 sample hospitals with realistic dummy data.
+3. Emergency Contact & Alert System
+During patient registration/profile setup, add fields for:
+Emergency Contact Name
+Relationship
+Emergency Contact Number
+Add an emergency alert feature:
+If emergency health conditions are detected, trigger an emergency alert popup.
+Instead of actual SMS integration, display a professional popup message:
+“Emergency alert sent to emergency contact number.”
+“Nearby hospitals have been notified.”
+Show emergency status in patient and caretaker dashboards.
+Add emergency alert history tracking.
+4. Nearby Doctors & Appointment Booking
+
+Enhance the Patient Dashboard Appointment section with:
+
+Nearby doctors listing
+Doctor cards containing:
+Doctor image
+Name
+Specialization
+Ratings
+Years of experience
+Consultation fee
+Available timings
+Hospital name
+Add:
+“Book Appointment” button
+Appointment confirmation modal/page
+Appointment status tracking
+Use responsive modern UI cards with smooth hover effects and animations.
+5. AI Assistant Bug Fix
+In the AI Assistant section, the “Get Reports” feature is currently not working properly.
+Fix the issue so users can successfully:
+Generate reports
+View reports
+Download reports in PDF format
+Ensure report download functionality works correctly across all dashboards.
+6. UI/UX Improvements
+Maintain consistent professional healthcare-themed styling.
+Improve:
+Typography
+Color palette
+Card layouts
+Dashboard appearance
+Responsive behavior
+Animations and transitions
+Ensure all modules work properly on:
+Desktop
+Tablet
+Mobile device

@@ -1,0 +1,300 @@
+
+You are continuing the previously built Healthcare AI Platform.
+
+IMPORTANT:
+
+* DO NOT rewrite the existing project.
+* EXTEND the existing application modularly.
+* Maintain the same UI design system and folder structure.
+* Reuse existing APIs and database models.
+* Keep the premium blue SaaS healthcare UI consistent.
+
+---
+
+# 🧠 AI HEALTHCARE CHATBOT
+
+Create:
+
+* AI Assistant page
+
+UI:
+
+* WhatsApp-style chat interface
+* Left/right chat bubbles
+* Scrollable messages
+* Voice input support
+* Smooth animations
+
+Backend API:
+POST /chat
+
+Rule-based AI responses:
+
+* Fever
+* BP
+* Diabetes
+* Emergency
+* Chest pain
+* Headache
+
+Use professional medical-friendly responses.
+
+---
+
+# 🎙️ VOICE ASSISTANT
+
+Use:
+
+* Web Speech API
+
+Commands:
+
+* “Call ambulance”
+* “Check my health”
+* “Show BP report”
+* “Remind medicine”
+
+Convert:
+speech → text → chatbot request
+
+---
+
+# 🧠 AI INSIGHTS MODULE
+
+Analyze last 7 days of health data.
+
+Generate insights:
+
+* BP increasing trend
+* High glucose warning
+* Irregular heartbeat
+* Stable vitals
+
+Display:
+
+* Insight cards
+* Dashboard widgets
+* AI summary panels
+
+Backend API:
+GET /insights
+
+---
+
+# 📄 PDF REPORT GENERATION
+
+Backend API:
+GET /generate-report
+
+Generate downloadable PDF containing:
+
+* Patient details
+* Charts
+* Alerts history
+* AI insights
+* Health summary
+* Timestamp
+
+---
+
+# 🏥 HOSPITAL MODULE — PREMIUM VISUAL UI
+
+Create a modern Hospital Module similar to premium hospital booking platforms.
+
+The UI must visually resemble:
+
+* Practo
+* Apollo
+* Premium healthcare SaaS dashboards
+
+Use:
+
+* Large image cards
+* Rounded corners
+* Soft shadows
+* Spacious layouts
+* Modern blue healthcare gradients
+
+---
+
+# 🖼️ HOSPITAL IMAGE CARDS
+
+Each hospital card must include:
+
+* Large hospital image
+* Hospital name
+* Specialization
+* Location
+* Available beds
+* Emergency status
+* Rating
+* Contact button
+* Book appointment button
+
+Use:
+
+* Hover animations
+* Gradient buttons
+* Modern typography
+
+---
+
+# 🏨 HOSPITAL LISTING PAGE
+
+Features:
+
+* Search hospitals
+* Filter by specialization
+* Filter by city
+* Emergency hospitals section
+* Top-rated hospitals section
+
+Layout:
+
+* Responsive image card grid
+
+Use realistic images for:
+
+* Hospital buildings
+* ICU rooms
+* Ambulances
+* Doctors
+* Emergency care
+* Medical staff
+
+---
+
+# 🏛️ GOVT SCHEMES MODULE
+
+Create a premium Govt Schemes page similar to the reference design.
+
+Each scheme must appear as a BEAUTIFUL informational card.
+
+---
+
+# 📦 GOVT SCHEME CARDS
+
+Each card must include:
+
+* Large image/banner
+* Ministry badge/tag
+* Scheme title
+* Description
+* Eligibility
+* Benefits
+* “Apply Now” button
+
+Use:
+
+* Rounded corners
+* Soft shadows
+* Hover effects
+* Blue-themed buttons
+* Elegant spacing
+
+Use realistic healthcare-related images:
+
+* Hospitals
+* Doctors
+* Healthcare camps
+* Insurance support
+* Rural healthcare
+* Government healthcare programs
+
+---
+
+# 👨‍⚕️ DOCTOR BOOKING SYSTEM
+
+Features:
+
+* Doctor listing
+* Specializations
+* Booking appointments
+* Date/time selection
+* Booking history
+
+Use modern profile cards.
+
+---
+
+# 🚑 AMBULANCE TRACKING SYSTEM
+
+Create simulated ambulance tracking.
+
+Display:
+
+* Ambulance distance
+* ETA
+* Emergency status badges
+
+Use animated live-tracking style UI.
+
+---
+
+# 🏥 HOSPITAL ADMIN ADVANCED FEATURES
+
+Add:
+
+* Bed availability management
+* ICU occupancy tracking
+* Emergency management
+* Ambulance management
+* Doctor management
+* Patient overview
+
+Include:
+
+* Analytics charts
+* Stats cards
+* Live activity feed
+
+---
+
+# 🩸 BLOOD DONATION MODULE
+
+Create:
+
+* Blood donor listing
+* Blood group filters
+* Nearby donors
+* Blood request feature
+
+Use modern responsive card UI.
+
+---
+
+# 📡 APIs REQUIRED
+
+Implement:
+
+* POST /chat
+* GET /insights
+* GET /generate-report
+* GET /schemes
+* GET /hospitals
+
+Ensure:
+
+* Proper JSON responses
+* Error handling
+* Modular backend architecture
+
+---
+
+# ✨ FINAL EXPECTATION
+
+The newly added modules must:
+
+* Match the premium blue SaaS healthcare UI
+* Feel modern and professional
+* Be responsive
+* Have smooth animations
+* Look like a real startup product
+
+The final project should be:
+
+* Portfolio-worthy
+* Hackathon-winning quality
+* Production-style
+* Cleanly coded
+* Beautifully designe
